@@ -24,27 +24,27 @@ function DashboardAdmin() {
           <h3>Menú Admin</h3>
           <ul>
             <li>
-              <NavLink to="carreras" className={({ isActive }) => isActive ? 'active' : ''}>
+              <NavLink to="/dashboard-admin/carreras" className={({ isActive }) => isActive ? 'active' : ''}>
                 Carreras
               </NavLink>
             </li>
             <li>
-              <NavLink to="materias" className={({ isActive }) => isActive ? 'active' : ''}>
+              <NavLink to="/dashboard-admin/materias" className={({ isActive }) => isActive ? 'active' : ''}>
                 Materias
               </NavLink>
             </li>
             <li>
-              <NavLink to="salones" className={({ isActive }) => isActive ? 'active' : ''}>
+              <NavLink to="/dashboard-admin/salones" className={({ isActive }) => isActive ? 'active' : ''}>
                 Salones
               </NavLink>
             </li>
             <li>
-              <NavLink to="grupos" className={({ isActive }) => isActive ? 'active' : ''}>
+              <NavLink to="/dashboard-admin/grupos" className={({ isActive }) => isActive ? 'active' : ''}>
                 Grupos
               </NavLink>
             </li>
             <li>
-              <NavLink to="horarios" className={({ isActive }) => isActive ? 'active' : ''}>
+              <NavLink to="/dashboard-admin/horarios" className={({ isActive }) => isActive ? 'active' : ''}>
                 Horarios
               </NavLink>
             </li>
@@ -64,7 +64,7 @@ function DashboardAdmin() {
         </header>
         <main>
           <Routes>
-            <Route index element={<Navigate to="carreras" replace />} />
+            <Route index element={<Navigate to="/dashboard-admin/carreras" replace />} />
             <Route path="carreras" element={<Carreras />} />
             <Route
               path="materias"

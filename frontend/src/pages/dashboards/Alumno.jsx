@@ -54,7 +54,7 @@ function DashboardAlumno() {
         </header>
         <main>
           <Routes>
-            <Route path="/" element={<Navigate to="/dashboard-alumno/seleccionar-materias" replace />} />
+            <Route index element={<Navigate to="/dashboard-alumno/seleccionar-materias" replace />} />
             <Route
               path="seleccionar-materias"
               element={
