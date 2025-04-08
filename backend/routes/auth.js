@@ -7,10 +7,9 @@ const usuarioModel = require('../models/usuario');
 // Registro
 router.post('/register', async (req, res) => {
   const { nombre, correo, contrasena, rol } = req.body;
-
   const hashedPassword = await bcrypt.hash(contrasena, 10);
 
-  usuarioModel.crearUsuario({ nombre, correo, contrasena: hashedPassword, rol }, (err, result) => {
+  usuarioModel.crearUsuario({ nombre, correo, contrasena: hashedPassword, rol, carrera_FK: req.body.carrera_FK }, (err, result) => {
     if (err) return res.status(500).json({ error: err.sqlMessage });
     res.json({ message: 'Usuario registrado correctamente' });
   });
