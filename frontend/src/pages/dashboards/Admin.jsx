@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route, NavLink, Navigate, useNavigate } from 'react-router-dom';
 import '../styles/DashboardAdmin.css'; 
 import Carreras from './Admin/Carreras';
+import Materias from './Admin/Materias';
 
 function DashboardAdmin() {
   const navigate = useNavigate();
@@ -66,15 +67,9 @@ function DashboardAdmin() {
           <Routes>
             <Route index element={<Navigate to="/dashboard-admin/carreras" replace />} />
             <Route path="carreras" element={<Carreras />} />
-            <Route
-              path="materias"
-              element={
-                <div>
-                  <h3>Gestión de Materias</h3>
-                  <p>Aquí se gestionan las materias.</p>
-                </div>
-              }
-            />
+
+            <Route index element={<Navigate to="/dashboard-admin/materias" replace />} />
+            <Route path="materias" element={<Materias />} />
             <Route
               path="salones"
               element={
