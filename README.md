@@ -18,7 +18,6 @@ cd GestorEscolar
 
 2. Configurar la base de datos:
    - Crear un usuario MySQL con los permisos necesarios.
-   - Copiar el archivo `.env.example` a `.env` en la carpeta `backend`.
    - Actualizar las credenciales de la base de datos en el archivo `.env`.
 
 3. Instalar dependencias:
