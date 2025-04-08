@@ -39,7 +39,7 @@
   content: '';
   position: absolute;
   bottom: -15px;
-  left: 50%;
+  left: 35%;
   width: 80px; /* Línea más larga */
   height: 5px; /* Línea más gruesa */
   background: #fff;

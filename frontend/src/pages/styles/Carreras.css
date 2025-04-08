@@ -1,10 +1,3 @@
-/* Reset básico */
-.carreras-component * {
-
-  padding: 0;
-  box-sizing: border-box;
-}
-
 /* Estilos generales del componente */
 .carreras-component {
   font-family: 'Arial', sans-serif;
@@ -192,6 +185,22 @@
 .carreras-component .tabla-carreras tr:hover {
   background: #3b3b3b;
   transform: scale(1.01);
+}
+
+/* Botón eliminar en la tabla */
+.carreras-component .tabla-carreras button {
+  background: #b71c1c; /* Rojo oscuro para eliminación */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.carreras-component .tabla-carreras button:hover {
+  background: #a31515;
+  transform: scale(1.05);
 }
 
 /* Parrafos */

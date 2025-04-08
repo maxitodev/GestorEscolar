@@ -27,4 +27,13 @@ router.post('/', (req, res) => {
   });
 });
 
+// Crear endpoint para eliminar una carrera
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+  carreraModel.eliminarCarrera(id, (err, result) => {
+    if (err) return res.status(500).json({ error: err.sqlMessage });
+    res.json({ message: 'Carrera eliminada exitosamente' });
+  });
+});
+
 module.exports = router;

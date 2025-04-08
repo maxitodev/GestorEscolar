@@ -19,7 +19,17 @@ const obtenerCarreras = (callback) => {
   });
 };
 
+// Eliminar una carrera por ID
+const eliminarCarrera = (id, callback) => {
+  const sql = `DELETE FROM Carreras WHERE ID_carrera = ?`;
+  db.query(sql, [id], (err, result) => {
+    if (err) return callback(err);
+    callback(null, result);
+  });
+};
+
 module.exports = {
   crearCarrera,
-  obtenerCarreras
+  obtenerCarreras,
+  eliminarCarrera, // nuevo
 };

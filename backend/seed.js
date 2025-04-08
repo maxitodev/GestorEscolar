@@ -10,6 +10,9 @@ const connection = mysql.createConnection({
   multipleStatements: true
 });
 
+// Verificación: Las sentencias SQL se ajustan a las definiciones de las tablas creadas en initDb.js.
+// Asegúrate de ejecutar primero initDb.js y luego seed.js para sembrar los datos correctamente.
+
 const seedSQL = `
 -- Insertar sample de carreras
 INSERT INTO Carreras (nombre_carrera) VALUES 

@@ -49,6 +49,34 @@ function Carreras() {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3001/carreras/${id}`);
+      setMensaje('Carrera eliminada correctamente');
+      obtenerCarreras();
+    } catch (err) {
+      setError('Error al eliminar la carrera.');
+    }
+  };
+
+  useEffect(() => {
+    if (mensaje) {
+      const timer = setTimeout(() => {
+        setMensaje('');
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [mensaje]);
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError('');
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
+
   return (
     <div className="carreras-component">
       <div className="contenedor-carreras">
@@ -76,6 +104,7 @@ function Carreras() {
               <tr>
                 <th>ID</th>
                 <th>Nombre</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -83,6 +112,11 @@ function Carreras() {
                 <tr key={carrera.ID_carrera}>
                   <td>{carrera.ID_carrera}</td>
                   <td>{carrera.nombre_carrera}</td>
+                  <td>
+                    <button onClick={() => handleDelete(carrera.ID_carrera)}>
+                      Eliminar
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

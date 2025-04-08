@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS Materia (
     nombre_materia VARCHAR(100) NOT NULL,
     carrera_FK INT NOT NULL,
     capacidad INT NOT NULL,
-    FOREIGN KEY (carrera_FK) REFERENCES Carreras(ID_carrera)
+    FOREIGN KEY (carrera_FK) REFERENCES Carreras(ID_carrera) ON DELETE CASCADE
 );
 
 -- Tabla: Horario
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS Grupos (
     materia2_fk INT,
     materia3_fk INT,
     materia4_fk INT,
-    FOREIGN KEY (carrera_fk) REFERENCES Carreras(ID_carrera),
+    FOREIGN KEY (carrera_fk) REFERENCES Carreras(ID_carrera) ON DELETE CASCADE,
     FOREIGN KEY (materia1_fk) REFERENCES Materia(ID_materia),
     FOREIGN KEY (materia2_fk) REFERENCES Materia(ID_materia),
     FOREIGN KEY (materia3_fk) REFERENCES Materia(ID_materia),
