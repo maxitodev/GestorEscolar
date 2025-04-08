@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route, NavLink, Navigate, useNavigate } from 'react-router-dom';
 import '../styles/DashboardAdmin.css'; 
+import Carreras from './Admin/Carreras';
 
 function DashboardAdmin() {
   const navigate = useNavigate();
@@ -23,27 +24,27 @@ function DashboardAdmin() {
           <h3>Menú Admin</h3>
           <ul>
             <li>
-              <NavLink to="/dashboard-admin/carreras" className={({ isActive }) => isActive ? 'active' : ''}>
+              <NavLink to="carreras" className={({ isActive }) => isActive ? 'active' : ''}>
                 Carreras
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard-admin/materias" className={({ isActive }) => isActive ? 'active' : ''}>
+              <NavLink to="materias" className={({ isActive }) => isActive ? 'active' : ''}>
                 Materias
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard-admin/salones" className={({ isActive }) => isActive ? 'active' : ''}>
+              <NavLink to="salones" className={({ isActive }) => isActive ? 'active' : ''}>
                 Salones
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard-admin/grupos" className={({ isActive }) => isActive ? 'active' : ''}>
+              <NavLink to="grupos" className={({ isActive }) => isActive ? 'active' : ''}>
                 Grupos
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard-admin/horarios" className={({ isActive }) => isActive ? 'active' : ''}>
+              <NavLink to="horarios" className={({ isActive }) => isActive ? 'active' : ''}>
                 Horarios
               </NavLink>
             </li>
@@ -63,16 +64,8 @@ function DashboardAdmin() {
         </header>
         <main>
           <Routes>
-            <Route path="/" element={<Navigate to="/dashboard-admin/carreras" replace />} />
-            <Route
-              path="carreras"
-              element={
-                <div>
-                  <h3>Gestión de Carreras</h3>
-                  <p>Aquí se gestionan las carreras académicas.</p>
-                </div>
-              }
-            />
+            <Route index element={<Navigate to="carreras" replace />} />
+            <Route path="carreras" element={<Carreras />} />
             <Route
               path="materias"
               element={

@@ -1,15 +1,16 @@
 const db = require('../config/db');
 
-// Función para crear una carrera
-const crearCarrera = (nombre_carrera, callback) => {
+// Crear una nueva carrera con nombre
+const crearCarrera = (nombre, callback) => {
+  const safeNombre = typeof nombre === 'string' ? nombre : String(nombre); // added
   const sql = `INSERT INTO Carreras (nombre_carrera) VALUES (?)`;
-  db.query(sql, [nombre_carrera], (err, result) => {
+  db.query(sql, [safeNombre], (err, result) => {
     if (err) return callback(err);
     callback(null, result);
   });
 };
 
-// Función para obtener todas las carreras
+// Obtener todas las carreras
 const obtenerCarreras = (callback) => {
   const sql = `SELECT * FROM Carreras`;
   db.query(sql, (err, results) => {
