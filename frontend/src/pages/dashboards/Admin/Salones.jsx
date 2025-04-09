@@ -65,18 +65,21 @@ function Salones() {
             type="number"
             placeholder="Capacidad"
             value={capacidad}
-            onChange={(e) => setCapacidad(e.target.value)}
+            onChange={(e) => setCapacidad(Number(e.target.value))}
             required
           />
-          <input
-            type="text"
-            placeholder="Tipo (aula, laboratorio, auditorio)"
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
-            required
-          />
-          <button type="submit">Registrar</button>
-        </form>
+          <select
+          value={tipo}
+          onChange={(e) => setTipo(e.target.value)}
+          required
+        >
+          <option value="">Selecciona el tipo de salón</option>
+          <option value="aula">Aula</option>
+          <option value="laboratorio">Laboratorio</option>
+          <option value="auditorio">Auditorio</option>
+        </select>
+        <button type="submit">Registrar</button>
+      </form>
 
         {mensaje && <div className="mensaje-exito">{mensaje}</div>}
         {error && <div className="mensaje-error">{error}</div>}
