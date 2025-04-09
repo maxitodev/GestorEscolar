@@ -5,7 +5,7 @@ import '../../styles/Horarios.css';
 function HorariosForm() {
   const [materias, setMaterias] = useState([]);
   const [materiaId, setMateriaId] = useState('');
-  const [diasConvertidos, setDiasSemana] = useState([]);
+  const [diasSemana, setDiasSemana] = useState([]);
   const [horaInicio, setHoraInicio] = useState('');
   const [horaFin, setHoraFin] = useState('');
   const [mensaje, setMensaje] = useState('');
@@ -27,9 +27,9 @@ function HorariosForm() {
   const manejarCambioDias = (e) => {
     const { value, checked } = e.target;
     if (checked) {
-      setDiasSemana([...diasConvertidos, value]);
+      setDiasSemana([...diasSemana, value]);
     } else {
-      setDiasSemana(diasConvertidos.filter((dia) => dia !== value));
+      setDiasSemana(diasSemana.filter((dia) => dia !== value));
     }
   };
 
@@ -38,27 +38,17 @@ function HorariosForm() {
     setMensaje('');
     setError('');
 
-    if (!materiaId || !horaInicio || !horaFin || diasConvertidos.length === 0) {
+    if (!materiaId || !horaInicio || !horaFin || diasSemana.length === 0) {
       setError('Por favor, completa todos los campos.');
       return;
     }
 
-    
-    const mapaDias = {
-      Lunes: 0,
-      Martes: 1,
-      Miércoles: 2,
-      Jueves: 3,
-      Viernes: 4
-    };
-    const diasConvertidos = diasConvertidos.map(dia => mapaDias[dia]);
-    
     try {
       const res = await axios.post('http://localhost:3001/horarios/asignar', {
         materiaId,
         horaInicio,
         horaFin,
-        diasConvertidos
+        diasSemana
       });
 
       setMensaje(res.data.message || 'Horario asignado correctamente.');
@@ -96,7 +86,7 @@ function HorariosForm() {
               <input
                 type="checkbox"
                 value={dia}
-                checked={diasConvertidos.includes(dia)}
+                checked={diasSemana.includes(dia)}
                 onChange={manejarCambioDias}
               />
               {dia}

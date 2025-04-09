@@ -1,0 +1,20 @@
+{
+  "name": "gestorescolar",
+  "version": "1.0.0",
+  "description": "Sistema de gestión escolar con autenticación de usuarios.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maxuriel/GestorEscolar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Maxuriel/GestorEscolar/issues"
+  },
+  "homepage": "https://github.com/Maxuriel/GestorEscolar#readme"
+}

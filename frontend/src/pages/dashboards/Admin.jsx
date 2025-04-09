@@ -3,6 +3,8 @@ import { Routes, Route, NavLink, Navigate, useNavigate } from 'react-router-dom'
 import '../styles/DashboardAdmin.css'; 
 import Carreras from './Admin/Carreras';
 import Materias from './Admin/Materias';
+import HorariosForm from './Admin/Horarios'; // Importa el componente
+
 
 function DashboardAdmin() {
   const navigate = useNavigate();
@@ -94,6 +96,7 @@ function DashboardAdmin() {
                 <div>
                   <h3>Gestión de Horarios</h3>
                   <p>Aquí se asignan y gestionan los horarios.</p>
+                  <HorariosForm />
                 </div>
               }
             />

@@ -1,0 +1,62 @@
+/* Horarios.css */
+.horarios-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  .form-horario {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  .mensaje-exito, .mensaje-error {
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .mensaje-exito {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .mensaje-error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .dias-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    color: white;
+    font-size: 1rem;
+  }
+  
+  .checkbox-dia {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
