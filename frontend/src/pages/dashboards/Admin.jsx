@@ -4,6 +4,8 @@ import '../styles/DashboardAdmin.css';
 import Carreras from './Admin/Carreras';
 import Materias from './Admin/Materias';
 import Grupos from './Admin/Grupos';
+import Salones from './Admin/Salones';
+
 
 function DashboardAdmin() {
   const navigate = useNavigate();
@@ -68,31 +70,15 @@ function DashboardAdmin() {
           <Routes>
             <Route index element={<Navigate to="/dashboard-admin/carreras" replace />} />
             <Route path="carreras" element={<Carreras />} />
-
-            <Route index element={<Navigate to="/dashboard-admin/materias" replace />} />
             <Route path="materias" element={<Materias />} />
-            <Route
-              path="salones"
-              element={
-                <div>
-                  <h3>Gestión de Salones</h3>
-                  <p>Aquí se gestionan los salones.</p>
-                </div>
-              }
-            />
-
-            <Route index element={<Navigate to="/dashboard-admin/grupos" replace />} />
+            <Route path="salones" element={<Salones />} />
             <Route path="grupos" element={<Grupos />} />
-
-            <Route
-              path="horarios"
-              element={
-                <div>
-                  <h3>Gestión de Horarios</h3>
-                  <p>Aquí se asignan y gestionan los horarios.</p>
-                </div>
-              }
-            />
+            <Route path="horarios" element={
+              <div>
+                <h3>Gestión de Horarios</h3>
+                <p>Aquí se asignan y gestionan los horarios.</p>
+              </div>
+            } />
           </Routes>
         </main>
       </div>
