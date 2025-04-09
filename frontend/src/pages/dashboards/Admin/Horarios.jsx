@@ -48,7 +48,7 @@ function HorariosForm() {
         materiaId,
         horaInicio,
         horaFin,
-        diasSemana
+        diasSemana // Se envían como texto: ["Lunes", "Miércoles", ...]
       });
 
       setMensaje(res.data.message || 'Horario asignado correctamente.');

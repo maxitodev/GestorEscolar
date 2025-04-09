@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const horarioModel = require('../models/horarioMateria');
 
+
 // Convertir hora a bloque numérico
 function obtenerBloqueHorario(horaInicio, horaFin) {
   const bloques = {
@@ -42,6 +43,7 @@ function convertirDiaASem(dia) {
 router.post('/asignar', (req, res) => {
   const { materiaId, horaInicio, horaFin, diasSemana } = req.body;
   console.log("➡️ Datos recibidos:", req.body);
+  
 
   if (!materiaId || !horaInicio || !horaFin || !Array.isArray(diasSemana) || diasSemana.length === 0) {
     return res.status(400).json({ error: 'Todos los campos son requeridos.' });

@@ -6,6 +6,8 @@ const carrerasRoutes = require('./routes/carreras');
 const materiasRoutes = require('./routes/materias');
 const grupoRoutes = require('./routes/grupo');
 const salonesRouter = require('./routes/salones');
+const horarioRoutes = require('./routes/horarioMateria');
+
 
 
 const app = express();
@@ -17,6 +19,8 @@ app.use('/carreras', carrerasRoutes);
 app.use('/materias', materiasRoutes);
 app.use('/grupo', grupoRoutes);
 app.use('/salones', salonesRouter);
+app.use('/horarios', horarioRoutes);
+
 
 
 app.get('/', (req, res) => {
