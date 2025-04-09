@@ -18,16 +18,8 @@ cd GestorEscolar
 ```
 
 2. Configurar la base de datos:
-   - Crear un usuario MySQL con los permisos necesarios.
-   - Crear el archivo `.env` dentro de `backend/` con las siguientes variables:
+   - Crear un usuario MySQL con los permisos necesarios. (Usa el archivo `.env` dentro de `backend/`)
 
-```env
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=tu_contraseña
-DB_NAME=gestor_escolar
-PORT=3001
-```
 
 3. Instalar dependencias:
 ```bash
