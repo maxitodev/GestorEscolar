@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../../styles/Grupos.css';
+import '../../styles/Grupos.css'
 
 function Grupos() {
   const [carreraSeleccionada, setCarreraSeleccionada] = useState('');
@@ -18,11 +18,19 @@ function Grupos() {
     obtenerCarreras();
   }, []);
 
-  // ... (useEffects para limpiar mensajes se mantienen)
+  useEffect(() => {
+    if (mensaje || error) {
+      const timer = setTimeout(() => {
+        setMensaje('');
+        setError('');
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [mensaje, error]);
 
   const obtenerGrupos = async () => {
     try {
-      const res = await axios.get('http://localhost:3001/grupos');
+      const res = await axios.get('http://localhost:3001/grupo');
       setGrupos(res.data);
     } catch (err) {
       console.error('Error al obtener los grupos:', err);
@@ -42,7 +50,7 @@ function Grupos() {
 
   const obtenerMateriasPorCarrera = async (carreraId) => {
     try {
-      const res = await axios.get(`http://localhost:3001/grupos/materias/${carreraId}`);
+      const res = await axios.get(`http://localhost:3001/grupo/materias/${carreraId}`);
       setMateriasDisponibles(res.data);
     } catch (err) {
       console.error('Error al obtener las materias:', err);
@@ -56,18 +64,19 @@ function Grupos() {
     setError('');
     setCargando(true);
 
-    if (!carreraSeleccionada) {
+    const id = Number(carreraSeleccionada);
+    if (!id) {
       setError('Por favor selecciona una carrera.');
       setCargando(false);
       return;
     }
 
     try {
-      const res = await axios.post(`http://localhost:3001/grupos/${carreraSeleccionada}`);
+      const res = await axios.post(`http://localhost:3001/grupo/${id}`);
       setMensaje(res.data.message);
       obtenerGrupos();
     } catch (err) {
-      setError(err.response?.data?.error || 'Ocurrió un error al generar el grupo.');
+      setError(err.response?.data?.error || 'Error al generar el grupo.');
     } finally {
       setCargando(false);
     }
@@ -79,29 +88,23 @@ function Grupos() {
     setError('');
     setCargando(true);
 
-    if (!carreraSeleccionada) {
-      setError('Por favor selecciona una carrera.');
-      setCargando(false);
-      return;
-    }
-
-    if (materiasSeleccionadas.length !== 4) {
-      setError('Debes seleccionar exactamente 4 materias.');
-      setCargando(false);
-      return;
-    }
-
     try {
-      const res = await axios.post('http://localhost:3001/grupos/manual', {
-        carreraId: carreraSeleccionada,
-        materias: materiasSeleccionadas
+      const carrera = parseInt(carreraSeleccionada, 10);
+      const materias = materiasSeleccionadas.map(id => parseInt(id, 10));
+
+      console.log("Enviando:", { carreraId: carrera, materias });
+
+      await axios.post('http://localhost:3001/grupo/manual', {
+        carreraId: carrera,
+        materias: materias
       });
       
-      setMensaje(res.data.message);
+      setMensaje('Grupo creado exitosamente');
       setMateriasSeleccionadas([]);
       obtenerGrupos();
     } catch (err) {
-      setError(err.response?.data?.error || 'Ocurrió un error al crear el grupo.');
+      console.error('Error completo:', err);
+      setError(err.response?.data?.error || 'Error al crear el grupo');
     } finally {
       setCargando(false);
     }
@@ -132,14 +135,14 @@ function Grupos() {
         
         <div className="modo-selector">
           <button 
+            className={`btn ${!modoManual ? 'active' : ''}`}
             onClick={toggleModo}
-            className={!modoManual ? 'active' : ''}
           >
             Generación Automática
           </button>
           <button 
+            className={`btn ${modoManual ? 'active' : ''}`}
             onClick={toggleModo}
-            className={modoManual ? 'active' : ''}
           >
             Asignación Manual
           </button>
@@ -176,7 +179,7 @@ function Grupos() {
         ) : (
           <>
             <h3>Asignar Materias Manualmente</h3>
-            <form onSubmit={crearGrupoManual} className="form-grupo-manual">
+            <form onSubmit={crearGrupoManual} className="form-grupo">
               <select
                 value={carreraSeleccionada}
                 onChange={(e) => {
@@ -234,31 +237,33 @@ function Grupos() {
 
         <h3>Grupos Registrados</h3>
         {grupos.length > 0 ? (
-          <table className="tabla-grupos">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Carrera</th>
-                <th>Materias</th>
-              </tr>
-            </thead>
-            <tbody>
-              {grupos.map((grupo) => (
-                <tr key={grupo.ID_grupos}>
-                  <td>{grupo.ID_grupos}</td>
-                  <td>{grupo.nombre_carrera}</td>
-                  <td>
-                    <ul className="materias-grupo">
-                      <li>{grupo.materia1 || '-'}</li>
-                      <li>{grupo.materia2 || '-'}</li>
-                      <li>{grupo.materia3 || '-'}</li>
-                      <li>{grupo.materia4 || '-'}</li>
-                    </ul>
-                  </td>
+          <div className="tabla-responsive">
+            <table className="tabla-grupos">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Carrera</th>
+                  <th>Materias</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {grupos.map((grupo) => (
+                  <tr key={grupo.ID_grupos}>
+                    <td>{grupo.ID_grupos}</td>
+                    <td>{grupo.nombre_carrera}</td>
+                    <td>
+                      <ul className="materias-grupo">
+                        <li>{grupo.materia1 || '-'}</li>
+                        <li>{grupo.materia2 || '-'}</li>
+                        <li>{grupo.materia3 || '-'}</li>
+                        <li>{grupo.materia4 || '-'}</li>
+                      </ul>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         ) : (
           <p>No hay grupos registrados aún.</p>
         )}
