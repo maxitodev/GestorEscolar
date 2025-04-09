@@ -3,7 +3,9 @@ import { Routes, Route, NavLink, Navigate, useNavigate } from 'react-router-dom'
 import '../styles/DashboardAdmin.css'; 
 import Carreras from './Admin/Carreras';
 import Materias from './Admin/Materias';
-import HorariosForm from './Admin/Horarios'; // Importa el componente
+import HorariosForm from './Admin/Horarios'; 
+import Salones from './Admin/Salones';
+import Grupos from './Admin/Grupos';
 
 
 function DashboardAdmin() {
@@ -69,37 +71,10 @@ function DashboardAdmin() {
           <Routes>
             <Route index element={<Navigate to="/dashboard-admin/carreras" replace />} />
             <Route path="carreras" element={<Carreras />} />
-
-            <Route index element={<Navigate to="/dashboard-admin/materias" replace />} />
             <Route path="materias" element={<Materias />} />
-            <Route
-              path="salones"
-              element={
-                <div>
-                  <h3>Gestión de Salones</h3>
-                  <p>Aquí se gestionan los salones.</p>
-                </div>
-              }
-            />
-            <Route
-              path="grupos"
-              element={
-                <div>
-                  <h3>Gestión de Grupos</h3>
-                  <p>Aquí se crean y gestionan los grupos.</p>
-                </div>
-              }
-            />
-            <Route
-              path="horarios"
-              element={
-                <div>
-                  <h3>Gestión de Horarios</h3>
-                  <p>Aquí se asignan y gestionan los horarios.</p>
-                  <HorariosForm />
-                </div>
-              }
-            />
+            <Route path="salones" element={<Salones />} />
+            <Route path="grupos" element={<Grupos />} />
+            <Route path="horarios" element={<HorariosForm />} />
           </Routes>
         </main>
       </div>
