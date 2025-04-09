@@ -3,6 +3,7 @@ import { Routes, Route, NavLink, Navigate, useNavigate } from 'react-router-dom'
 import '../styles/DashboardAdmin.css'; 
 import Carreras from './Admin/Carreras';
 import Materias from './Admin/Materias';
+import Grupos from './Admin/Grupos';
 
 function DashboardAdmin() {
   const navigate = useNavigate();
@@ -79,15 +80,10 @@ function DashboardAdmin() {
                 </div>
               }
             />
-            <Route
-              path="grupos"
-              element={
-                <div>
-                  <h3>Gestión de Grupos</h3>
-                  <p>Aquí se crean y gestionan los grupos.</p>
-                </div>
-              }
-            />
+
+            <Route index element={<Navigate to="/dashboard-admin/grupos" replace />} />
+            <Route path="grupos" element={<Grupos />} />
+
             <Route
               path="horarios"
               element={
