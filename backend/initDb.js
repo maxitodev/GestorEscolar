@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS Salon (
     Horario3_FK INT,
     capacidad INT NOT NULL,
     dia_sem INT NOT NULL,
+    tipo ENUM('aula', 'laboratorio', 'auditorio') NOT NULL DEFAULT 'aula',
     FOREIGN KEY (Horario1_FK) REFERENCES Horario(ID_horario),
     FOREIGN KEY (Horario2_FK) REFERENCES Horario(ID_horario),
     FOREIGN KEY (Horario3_FK) REFERENCES Horario(ID_horario)
