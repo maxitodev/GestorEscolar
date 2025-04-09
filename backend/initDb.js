@@ -52,15 +52,10 @@ CREATE TABLE IF NOT EXISTS Horario (
 -- Tabla: Salon
 CREATE TABLE IF NOT EXISTS Salon (
     ID_salon INT AUTO_INCREMENT PRIMARY KEY,
-    no_salon INT NOT NULL,
-    Horario1_FK INT,
-    Horario2_FK INT,
-    Horario3_FK INT,
+    no_salon VARCHAR(10) NOT NULL,
     capacidad INT NOT NULL,
-    dia_sem INT NOT NULL,
-    FOREIGN KEY (Horario1_FK) REFERENCES Horario(ID_horario),
-    FOREIGN KEY (Horario2_FK) REFERENCES Horario(ID_horario),
-    FOREIGN KEY (Horario3_FK) REFERENCES Horario(ID_horario)
+    tipo ENUM('aula', 'laboratorio', 'auditorio') NOT NULL DEFAULT 'aula',
+    dia_sem INT DEFAULT 0
 );
 
 -- Tabla: Grupos

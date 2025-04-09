@@ -235,3 +235,40 @@
       font-size: 1.3rem;
   }
 }
+
+/* Nuevos estilos para la sección de materias en la página Grupos */
+.carreras-component .materias-container {
+  margin-top: 20px;
+}
+.carreras-component .materias-container h4 {
+  margin-bottom: 10px;
+  text-align: center;
+  color: #ff6f00;
+}
+.carreras-component .materias-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.carreras-component .materia-item {
+  padding: 10px 15px;
+  background: #2b2b2b;
+  border: 1px solid #444;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.carreras-component .materia-item:hover {
+  background: #3b3b3b;
+  transform: scale(1.05);
+}
+.carreras-component .materia-item.selected {
+  background: #ff6f00;
+  color: #fff;
+  border-color: #ff6f00;
+}
+.carreras-component .materia-item .checkmark {
+  margin-left: 8px;
+  font-weight: bold;
+}
