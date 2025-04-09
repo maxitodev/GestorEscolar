@@ -13,6 +13,17 @@ function Salones() {
     obtenerSalones();
   }, []);
 
+  useEffect(() => {
+    if (mensaje || error) {
+      const timer = setTimeout(() => {
+        setMensaje('');
+        setError('');
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [mensaje, error]);
+
   const obtenerSalones = async () => {
     try {
       const res = await axios.get('http://localhost:3001/salones');
