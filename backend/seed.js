@@ -14,6 +14,11 @@ const connection = mysql.createConnection({
 // Asegúrate de ejecutar primero initDb.js y luego seed.js para sembrar los datos correctamente.
 
 const seedSQL = `
+-- Insertar sample de usuarios
+INSERT INTO Usuarios (nombre, correo, contrasena, rol, carrera_FK) VALUES
+  ('ejemplo', 'ejemplo@ejemplo.com', 'ejemplo', 'admin', NULL),
+  ('ejemplo2', 'ejemplo2@ejemplo2.com', 'ejemplo2', 'alumno', 1);
+
 -- Insertar sample de carreras
 INSERT INTO Carreras (nombre_carrera) VALUES 
   ('Ingeniería en Sistemas'),

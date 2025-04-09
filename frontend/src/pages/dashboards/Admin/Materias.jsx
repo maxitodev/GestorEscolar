@@ -9,13 +9,28 @@ function Materias() {
   const [carreras, setCarreras] = useState([]);
   const [mensaje, setMensaje] = useState('');
   const [error, setError] = useState('');
-  const [capacidad, setCapacidad] = useState(0);
-
+  const [capacidad, setCapacidad] = useState('');
 
   useEffect(() => {
     obtenerMaterias();
     obtenerCarreras();
   }, []);
+
+  // Nuevo useEffect para limpiar el mensaje después de 3 segundos
+  useEffect(() => {
+    if (mensaje) {
+      const timer = setTimeout(() => setMensaje(''), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [mensaje]);
+
+  // Nuevo useEffect para limpiar el error después de 3 segundos
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => setError(''), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   const obtenerMaterias = async () => {
     try {
@@ -52,28 +67,28 @@ function Materias() {
       return;
     }
   
-    if (!capacidad || capacidad <= 0) {
-      setError('Por favor ingresa una capacidad válida.');
+    if (!capacidad || Number(capacidad) <= 0) {
+      setError('Por favor ingresa el cupo.');
       return;
     }
   
     console.log({
       nombre_materia: nombre.trim(),
       id_carrera: carreraSeleccionada,
-      capacidad: capacidad
+      capacidad: Number(capacidad)
     });
   
     try {
       const res = await axios.post('http://localhost:3001/materias', {
         nombre_materia: nombre.trim(),
         id_carrera: carreraSeleccionada,
-        capacidad: capacidad
+        capacidad: Number(capacidad)
       });
   
       setMensaje(res.data.message);
       setNombre('');
       setCarreraSeleccionada('');
-      setCapacidad(0); // Reinicia la capacidad a 0
+      setCapacidad('');
       obtenerMaterias();
     } catch (err) {
       if (err.response?.data?.error) {
@@ -99,9 +114,9 @@ function Materias() {
           
           <input
             type="number"
-            placeholder="Capacidad"
+            placeholder="Cupo"
             value={capacidad}
-            onChange={(e) => setCapacidad(Number(e.target.value))} // Convertir a número
+            onChange={(e) => setCapacidad(e.target.value)}
             required
           />
         <select
