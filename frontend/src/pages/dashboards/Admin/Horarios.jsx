@@ -15,6 +15,16 @@ function HorariosForm() {
     obtenerMaterias();
   }, []);
 
+  useEffect(() => {
+    if (mensaje || error) {
+      const timer = setTimeout(() => {
+        setMensaje('');
+        setError('');
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [mensaje, error]);
+
   const obtenerMaterias = async () => {
     try {
       const res = await axios.get('http://localhost:3001/materias');
@@ -44,14 +54,14 @@ function HorariosForm() {
     }
 
     try {
-      const res = await axios.post('http://localhost:3001/horarios/asignar', {
+      await axios.post('http://localhost:3001/horarios/asignar', {
         materiaId,
         horaInicio,
         horaFin,
-        diasSemana // Se envían como texto: ["Lunes", "Miércoles", ...]
+        diasSemana
       });
 
-      setMensaje(res.data.message || 'Horario asignado correctamente.');
+      setMensaje(`Horario asignado correctamente para los días: ${diasSemana.join(', ')}`);
       setMateriaId('');
       setDiasSemana([]);
       setHoraInicio('');
@@ -89,7 +99,7 @@ function HorariosForm() {
                 checked={diasSemana.includes(dia)}
                 onChange={manejarCambioDias}
               />
-              {dia}
+              <span>{dia}</span>
             </label>
           ))}
         </div>
