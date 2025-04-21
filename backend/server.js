@@ -7,6 +7,8 @@ const materiasRoutes = require('./routes/materias');
 const grupoRoutes = require('./routes/grupo');
 const salonesRouter = require('./routes/salones');
 const horarioRoutes = require('./routes/horarioMateria');
+const inscripcionRoutes = require('./routes/inscribirMateria');
+
 
 
 
@@ -14,13 +16,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
 app.use('/auth', authRoutes);
 app.use('/carreras', carrerasRoutes);
 app.use('/materias', materiasRoutes);
 app.use('/grupo', grupoRoutes);
 app.use('/salones', salonesRouter);
 app.use('/horarios', horarioRoutes);
-
+app.use('/inscripcion', inscripcionRoutes);
 
 
 app.get('/', (req, res) => {

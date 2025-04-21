@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Maxuriel/GestorEscolar/issues"
   },
-  "homepage": "https://github.com/Maxuriel/GestorEscolar#readme"
+  "homepage": "https://github.com/Maxuriel/GestorEscolar#readme",
+  "dependencies": {
+    "axios": "^1.8.4"
+  }
 }
