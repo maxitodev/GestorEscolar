@@ -87,6 +87,11 @@ INSERT INTO Grupos (carrera_fk, materia1_fk, materia2_fk, materia3_fk, materia4_
 -- Asumimos que las materias de Administración en Empresas tienen IDs 6 a 9.
 INSERT INTO Grupos (carrera_fk, materia1_fk, materia2_fk, materia3_fk, materia4_fk) VALUES 
   (2, 6, 7, 8, 9);
+
+-- Insertar sample de usuarios
+INSERT INTO Usuarios (nombre, correo, contrasena, rol, carrera_FK) VALUES 
+  ('Admin', 'ejemplo@ejemplo.com', 'ejemplo', 'admin', NULL),
+  ('Alumno', 'ejemplo2@ejemplo2.com', 'ejemplo2', 'alumno', 1); -- Asignar carrera_FK = 1 (Ingeniería en Sistemas)
 `;
 
 connection.query(seedSQL, (err, results) => {

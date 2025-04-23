@@ -6,7 +6,7 @@ import Materias from './Admin/Materias';
 import HorariosForm from './Admin/Horarios'; 
 import Salones from './Admin/Salones';
 import Grupos from './Admin/Grupos';
-
+import HorariosGrupo from './Admin/FullCalendar'; // Corrected import name for consistency
 
 function DashboardAdmin() {
   const navigate = useNavigate();
@@ -53,6 +53,11 @@ function DashboardAdmin() {
                 Horarios
               </NavLink>
             </li>
+            <li>
+              <NavLink to="/dashboard-admin/horarios-grupo" className={({ isActive }) => isActive ? 'active' : ''}>
+                Horarios por Grupo
+              </NavLink>
+            </li>
           </ul>
         </div>
         <div>
@@ -75,6 +80,7 @@ function DashboardAdmin() {
             <Route path="salones" element={<Salones />} />
             <Route path="grupos" element={<Grupos />} />
             <Route path="horarios" element={<HorariosForm />} />
+            <Route path="horarios-grupo" element={<HorariosGrupo grupoId={1} />} /> {/* Pass a valid grupoId */}
           </Routes>
         </main>
       </div>

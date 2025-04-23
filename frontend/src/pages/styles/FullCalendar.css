@@ -1,0 +1,220 @@
+/* Estilos generales del componente */
+.full-calendar-container {
+  font-family: 'Arial', sans-serif;
+  background-color: #ffffff; /* Fondo oscuro */
+  color: #000000; /* Texto blanco */
+  overflow-x: hidden;
+  min-height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.full-calendar-container.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.full-calendar-container .contenedor-calendario {
+  max-width: 1200px;
+  width: 100%;
+  padding: 30px;
+  background: #ffffff; /* Fondo del contenedor */
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(255, 255, 255, 0.3);
+  /* Eliminada la animación */
+}
+
+/* Encabezados */
+.full-calendar-container h2,
+.full-calendar-container h3 {
+  color: #ff6f00; /* Naranja brillante */
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.full-calendar-container h2 {
+  font-size: 2rem;
+  letter-spacing: 1.5px;
+}
+
+.full-calendar-container h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 60px;
+  height: 3px;
+  background: #ff6f00;
+  transform: translateX(-50%);
+  /* Eliminada la transición */
+}
+
+.full-calendar-container h2:hover::after {
+  width: 80px;
+}
+
+/* Selector de grupo */
+.grupo-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.grupo-label {
+  font-size: 2rem;
+  color: #ff6f00;
+  text-align: center;
+}
+
+.grupo-select {
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: #2b2b2b; /* Fondo gris oscuro */
+  color: #fff;
+  /* Eliminadas las transiciones */
+}
+
+.grupo-select:focus {
+  outline: none;
+  border-color: #ff6f00;
+  box-shadow: 0 0 10px rgba(255, 111, 0, 0.5);
+}
+
+/* Mensajes */
+.loading-message,
+.error-message {
+  background: #b71c1c; /* Rojo para errores */
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  /* Eliminada la animación */
+}
+
+.no-events-message {
+  background: #2e7d32; /* Verde para mensajes de éxito */
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  /* Eliminada la animación */
+}
+
+/* Separador */
+.full-calendar-container hr {
+  border: none;
+  border-top: 1px solid #444;
+  margin: 30px 0;
+}
+
+/* Estilos del calendario */
+.fc {
+  background: #ffffff; /* Fondo del calendario ajustado al fondo general */
+  color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.fc .fc-timegrid-slot {
+  border-color: #000000; /* Líneas divisorias */
+}
+
+.fc .fc-daygrid-day-frame {
+  background-color: transparent; /* Elimina el fondo gris oscuro */
+}
+
+.fc .fc-timegrid-axis {
+  background-color: transparent; /* Elimina el fondo gris oscuro del eje de tiempo */
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.fc .fc-timegrid-slot-label-cushion {
+  color: #000000;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.fc .fc-event {
+  background-color: #ff6f00 !important; /* Eventos en naranja con alta prioridad */
+  border: none;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  width: 103%;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  opacity: 1; /* Asegura que los eventos sean completamente opacos */
+  box-shadow: none; /* Elimina sombras para evitar transparencia en la exportación */
+  /* Eliminadas las transiciones */
+}
+
+.fc .fc-event:hover {
+  background-color: #ff6f00; /* Sin cambio de color al pasar el mouse */
+  transform: none; /* Sin escalado */
+}
+
+.fc .fc-event-main {
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.fc .fc-scrollgrid-section-header {
+  background-color: transparent; /* Elimina el fondo gris oscuro del encabezado */
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.fc .fc-scrollgrid-section-header th {
+  border-color: #444; /* Borde del encabezado */
+}
+
+.fc .fc-timegrid-now-indicator-line {
+  border-color: #ff6f00; /* Indicador de hora actual */
+}
+
+.fc .fc-timegrid-now-indicator-arrow {
+  border-top-color: #ff6f00; /* Flecha del indicador de hora actual */
+}
+
+/* Estilos del botón de exportar */
+.exportar-pdf-boton:hover {
+  background-color: #e65c00; /* Naranja más claro al pasar el mouse */
+  /* Eliminadas las transiciones */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .full-calendar-container .contenedor-calendario {
+    padding: 20px;
+  }
+
+  .grupo-selector {
+    gap: 10px;
+  }
+
+  .grupo-select {
+    font-size: 0.9rem;
+  }
+
+  .fc .fc-timegrid-slot-label-cushion {
+    font-size: 12px;
+  }
+
+  .fc .fc-event {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+}

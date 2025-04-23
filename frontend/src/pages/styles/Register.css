@@ -29,7 +29,7 @@
   font-weight: 700;
   letter-spacing: 2px;
   margin-bottom: 2rem;
-  color: #fff;
+  color: #ff7300;
   text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   position: relative;
 }
@@ -41,7 +41,7 @@
   left: 38%;
   width: 80px;
   height: 5px;
-  background: #fff;
+  background: #ff7b00;
   border-radius: 10px;
   transform: translateX(-50%);
   animation: pulse 1.5s infinite;

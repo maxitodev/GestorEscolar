@@ -117,13 +117,6 @@
     }
   }
   
-  .admin-content main {
-    background: rgb(0, 0, 0);
-    padding: 20px;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-  }
-  
   .admin-content main h3 {
     font-size: 1.5rem;
     color: #fff;
@@ -202,12 +195,7 @@
   }
   
   /* Estilos adicionales para elementos específicos */
-  .admin-content main div {
-    margin-bottom: 20px;
-    padding: 15px;
-    border-left: 5px solid #000000;
-    animation: slideIn 0.5s ease-in-out;
-  }
+ 
   
   @keyframes slideIn {
     from {

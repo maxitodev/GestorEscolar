@@ -135,6 +135,28 @@ const obtenerGrupos = (callback) => {
   });
 };
 
+const obtenerHorariosDeGrupo = (grupoId, callback) => {
+  const sql = `
+    SELECT 
+      g.ID_grupos,
+      c.nombre_carrera,
+      m.nombre_materia,
+      h.Horario,
+      h.dia_sem
+    FROM Grupos g
+    JOIN Materia m ON m.ID_materia IN (g.materia1_fk, g.materia2_fk, g.materia3_fk, g.materia4_fk)
+    JOIN Horario h ON h.materia_FK = m.ID_materia
+    JOIN Carreras c ON g.carrera_fk = c.ID_carrera
+    WHERE g.ID_grupos = ?
+    ORDER BY h.dia_sem, h.Horario;
+  `;
+
+  db.query(sql, [grupoId], (err, results) => {
+    if (err) return callback(err);
+    callback(null, results);
+  });
+};
+
 // Nueva función para crear grupo manualmente
 const crearGrupoManual = (carreraId, materias, callback) => {
   // Verificar que las materias pertenezcan a la carrera
@@ -172,6 +194,9 @@ module.exports = {
   crearGrupo,
   crearGrupoManual,
   obtenerGrupos,
+  obtenerHorariosDeGrupo,
+  verificarConflictos,
+  verificarMismaCarrera,
   obtenerMateriasPorCarrera: async (carreraId) => {
     return new Promise((resolve, reject) => {
       const sql = `SELECT ID_materia, nombre_materia FROM Materia WHERE carrera_FK = ?`;

@@ -52,19 +52,37 @@ router.post('/:carreraId', (req, res) => {
 });
 
 // Obtener materias por carrera
-router.get('/materias/:carreraId', (req, res) => {
+router.get('/materias/:carreraId', async (req, res) => {
   const carreraId = parseInt(req.params.carreraId);
-  
+
   if (isNaN(carreraId)) {
     return res.status(400).json({ error: 'ID de carrera no válido.' });
   }
 
-  grupoModel.obtenerMateriasPorCarrera(carreraId)
-    .then(materias => res.json(materias))
-    .catch(err => {
-      console.error("Error al obtener materias:", err);
-      res.status(500).json({ error: 'Error al obtener materias' });
-    });
+  try {
+    const materias = await grupoModel.obtenerMateriasPorCarrera(carreraId);
+    res.json(materias);
+  } catch (err) {
+    console.error("Error al obtener materias:", err);
+    res.status(500).json({ error: 'Error al obtener materias.' });
+  }
+});
+
+// Obtener horarios de un grupo
+router.get('/:grupoId/horarios', (req, res) => {
+  const grupoId = parseInt(req.params.grupoId);
+
+  if (isNaN(grupoId) || grupoId <= 0) {
+    return res.status(400).json({ error: 'ID de grupo no válido.' });
+  }
+
+  grupoModel.obtenerHorariosDeGrupo(grupoId, (err, horarios) => {
+    if (err) {
+      console.error("Error al obtener los horarios del grupo:", err);
+      return res.status(500).json({ error: 'Error al obtener los horarios del grupo.' });
+    }
+    res.json(horarios);
+  });
 });
 
 module.exports = router;
