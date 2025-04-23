@@ -56,8 +56,9 @@ function DashboardAlumno() {
         setMensaje(response.data.message);  // Mostrar el mensaje de éxito
       })
       .catch((error) => {
-        setMensaje(error.response ? error.response.data.error : error.message);  // Mostrar el mensaje de error
-        console.error("Error de inscripción:", error);
+        const errorMessage = error.response?.data?.error || 'Error al procesar la inscripción.';
+        setMensaje(errorMessage); // Mostrar el mensaje de error
+        console.error("Error de inscripción:", errorMessage);
       });
   };
   

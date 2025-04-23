@@ -14,6 +14,7 @@ router.post('/inscribir', (req, res) => {
   // Llamada al modelo para inscribir al alumno en la materia
   inscripcionModel.inscribirMateria(materiaId, (err, result) => {
     if (err) {
+      console.error('Error al inscribir materia:', err.message); // Log the error
       return res.status(500).json({ error: err.message });
     }
     res.status(201).json({ message: result.mensaje });

@@ -6,24 +6,34 @@ const inscribirMateria = (materiaId, callback) => {
     return callback(new Error('La materia es obligatoria.'));
   }
 
-  // Verificar si hay cupo disponible en la materia
-  const sqlVerificarCupo = `SELECT cupo_disponible FROM Materia WHERE ID_materia = ?`;
+  // Verificar si hay capacidad disponible en la materia
+  const sqlVerificarCupo = `SELECT capacidad FROM Materia WHERE ID_materia = ?`; // Use capacidad
   db.query(sqlVerificarCupo, [materiaId], (err, result) => {
-    if (err) return callback(err);
+    if (err) {
+      console.error('Error ejecutando sqlVerificarCupo:', err); // Log the SQL error
+      return callback(new Error('Error al verificar la capacidad disponible.'));
+    }
+    if (result.length === 0) {
+      console.error('Materia no encontrada para ID:', materiaId); // Log missing data
+      return callback(new Error('La materia no existe.'));
+    }
 
-    if (result.length > 0 && result[0].cupo_disponible > 0) {
-      // Disminuir el cupo disponible de la materia
-      const sqlActualizarCupo = `UPDATE Materia SET cupo_disponible = cupo_disponible - 1 WHERE ID_materia = ?`;
+    if (result[0].capacidad > 0) { // Check capacidad
+      // Disminuir la capacidad disponible de la materia
+      const sqlActualizarCupo = `UPDATE Materia SET capacidad = capacidad - 1 WHERE ID_materia = ?`; // Update capacidad
       db.query(sqlActualizarCupo, [materiaId], (err, result) => {
-        if (err) return callback(err);
-
+        if (err) {
+          console.error('Error ejecutando sqlActualizarCupo:', err); // Log the SQL error
+          return callback(new Error('Error al actualizar la capacidad disponible.'));
+        }
         callback(null, {
           mensaje: '✅ Inscripción exitosa.',
           id_inscripcion: result.insertId
         });
       });
     } else {
-      callback(new Error('No hay cupo disponible para esta materia.'));
+      console.warn('No hay capacidad disponible para la materia con ID:', materiaId); // Log no available slots
+      callback(new Error('No hay capacidad disponible para esta materia.'));
     }
   });
 };
