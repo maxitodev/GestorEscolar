@@ -1,7 +1,7 @@
-
 const express = require('express');
 const router = express.Router();
 const horarioModel = require('../models/horarioMateria');
+const db = require('../config/db'); // Ensure the database connection is imported
 
 
 // Convertir hora a bloque numérico
@@ -77,6 +77,46 @@ router.post('/asignar', (req, res) => {
         }
       });
     }
+  });
+});
+
+// Obtener horario del alumno
+router.get('/horario/:alumnoId', (req, res) => {
+  const { alumnoId } = req.params;
+
+  const sql = `
+    SELECT m.ID_materia, m.nombre_materia, h.Horario AS horario, h.dia_sem AS dia
+    FROM Inscripcion i
+    JOIN Materia m ON i.ID_materia = m.ID_materia
+    JOIN Horario h ON m.ID_materia = h.materia_FK
+    WHERE i.ID_alumno = ?
+  `;
+
+  db.query(sql, [alumnoId], (err, results) => {
+    if (err) {
+      console.error('Error al obtener el horario:', err);
+      return res.status(500).json({ error: 'Error al obtener el horario.' });
+    }
+    if (results.length === 0) {
+      console.warn(`No se encontró horario para el alumno con ID: ${alumnoId}`);
+      return res.status(404).json({ error: 'No se encontró horario para el alumno.' });
+    }
+    res.status(200).json(results);
+  });
+});
+
+// Eliminar materia del horario
+router.delete('/eliminar/:materiaId', (req, res) => {
+  const { materiaId } = req.params;
+
+  const sql = `DELETE FROM Inscripcion WHERE ID_materia = ?`;
+
+  db.query(sql, [materiaId], (err, result) => {
+    if (err) {
+      console.error('Error al eliminar la materia:', err);
+      return res.status(500).json({ error: 'Error al eliminar la materia.' });
+    }
+    res.status(200).json({ message: 'Materia eliminada del horario.' });
   });
 });
 

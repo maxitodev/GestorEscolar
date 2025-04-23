@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Maxuriel/GestorEscolar#readme",
   "dependencies": {
     "@fullcalendar/react": "^6.1.17",
-    "@fullcalendar/timegrid": "^6.1.17"
+    "@fullcalendar/timegrid": "^6.1.17",
+    "axios": "^1.8.4"
   }
 }

@@ -1,4 +1,5 @@
 const mysql = require('mysql2');
+const bcrypt = require('bcrypt'); // Importar bcrypt
 require('dotenv').config();
 
 // Crear conexión a la base de datos 'gestor_escolar'
@@ -12,6 +13,10 @@ const connection = mysql.createConnection({
 
 // Verificación: Las sentencias SQL se ajustan a las definiciones de las tablas creadas en initDb.js.
 // Asegúrate de ejecutar primero initDb.js y luego seed.js para sembrar los datos correctamente.
+
+// Hashear contraseñas
+const adminPassword = bcrypt.hashSync('ejemplo', 10); // Hashear contraseña del admin
+const alumnoPassword = bcrypt.hashSync('ejemplo2', 10); // Hashear contraseña del alumno
 
 const seedSQL = `
 -- Insertar sample de carreras
@@ -55,17 +60,17 @@ INSERT INTO Materia (nombre_materia, carrera_FK, capacidad) VALUES
 
 -- Insertar sample de horarios
 -- Para materia 1 (Programación, suponiendo que ID_materia = 1)
-INSERT INTO Horario (materia_FK, Horario, dia_sem) VALUES 
+INSERT INTO Horario (materia_FK, horario, dia_sem) VALUES 
   (1, 1, 1),   -- 8-10, lunes
   (1, 2, 3);   -- 10-12, miércoles
 
 -- Para materia 2 (Matemáticas Discretas, ID_materia = 2)
-INSERT INTO Horario (materia_FK, Horario, dia_sem) VALUES 
+INSERT INTO Horario (materia_FK, horario, dia_sem) VALUES 
   (2, 1, 2),   -- 8-10, martes
   (2, 3, 4);   -- 12-2, jueves
 
 -- Para materia 6 (Gestión Empresarial, ID_materia = 6, de Administración de Empresas)
-INSERT INTO Horario (materia_FK, Horario, dia_sem) VALUES 
+INSERT INTO Horario (materia_FK, horario, dia_sem) VALUES 
   (6, 2, 1),   -- 10-12, lunes
   (6, 3, 3);   -- 12-2, miércoles
 
@@ -88,10 +93,15 @@ INSERT INTO Grupos (carrera_fk, materia1_fk, materia2_fk, materia3_fk, materia4_
 INSERT INTO Grupos (carrera_fk, materia1_fk, materia2_fk, materia3_fk, materia4_fk) VALUES 
   (2, 6, 7, 8, 9);
 
--- Insertar sample de usuarios
+-- Insertar sample de usuarios con contraseñas hasheadas
 INSERT INTO Usuarios (nombre, correo, contrasena, rol, carrera_FK) VALUES 
-  ('Admin', 'ejemplo@ejemplo.com', 'ejemplo', 'admin', NULL),
-  ('Alumno', 'ejemplo2@ejemplo2.com', 'ejemplo2', 'alumno', 1); -- Asignar carrera_FK = 1 (Ingeniería en Sistemas)
+  ('Admin', 'ejemplo@ejemplo.com', '${adminPassword}', 'admin', NULL),
+  ('Alumno', 'ejemplo2@ejemplo2.com', '${alumnoPassword}', 'alumno', 1);
+
+-- Insertar sample de inscripciones
+INSERT INTO Inscripcion (ID_materia, ID_alumno) VALUES 
+  (1, 2), -- Alumno inscrito en Programación
+  (2, 2); -- Alumno inscrito en Matemáticas Discretas
 `;
 
 connection.query(seedSQL, (err, results) => {

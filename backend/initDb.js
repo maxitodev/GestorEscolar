@@ -37,8 +37,17 @@ CREATE TABLE IF NOT EXISTS Materia (
     nombre_materia VARCHAR(100) NOT NULL,
     carrera_FK INT NOT NULL,
     capacidad INT NOT NULL,
+    cupo_disponible INT NOT NULL, -- Ensure this column exists
     FOREIGN KEY (carrera_FK) REFERENCES Carreras(ID_carrera) ON DELETE CASCADE
 );
+
+-- Trigger to initialize cupo_disponible with capacidad
+CREATE TRIGGER init_cupo_disponible
+BEFORE INSERT ON Materia
+FOR EACH ROW
+BEGIN
+    SET NEW.cupo_disponible = NEW.capacidad;
+END;
 
 -- Tabla: Horario
 CREATE TABLE IF NOT EXISTS Horario (
@@ -73,13 +82,15 @@ CREATE TABLE IF NOT EXISTS Grupos (
     FOREIGN KEY (materia4_fk) REFERENCES Materia(ID_materia)
 );
 
--- Tabla: Materias_inscritas
-CREATE TABLE IF NOT EXISTS Materias_inscritas (
-    ID_inscitas INT AUTO_INCREMENT PRIMARY KEY,
-    alumno_fk INT NOT NULL,
-    materia_fk INT NOT NULL,
-    FOREIGN KEY (alumno_fk) REFERENCES Usuarios(ID_usuario),
-    FOREIGN KEY (materia_fk) REFERENCES Materia(ID_materia)
+-- Tabla: Inscripcion
+CREATE TABLE IF NOT EXISTS Inscripcion (
+    ID_inscripcion INT AUTO_INCREMENT PRIMARY KEY,
+    ID_materia INT NOT NULL,
+    ID_alumno INT NOT NULL,
+    fecha_inscripcion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    confirmada TINYINT DEFAULT 0, -- Add confirmada column
+    FOREIGN KEY (ID_materia) REFERENCES Materia(ID_materia) ON DELETE CASCADE,
+    FOREIGN KEY (ID_alumno) REFERENCES Usuarios(ID_usuario) ON DELETE CASCADE
 );
 `;
 
