@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const inscripcionModel = require('../models/inscribirMateria');  // Asegúrate de que este modelo esté bien importado
+const inscripcionModel = require('../models/inscribirMateria');
+const db = require('../config/db'); // Added the db import
 
 // Ruta para inscribir al alumno en una materia
 router.post('/inscribir', (req, res) => {

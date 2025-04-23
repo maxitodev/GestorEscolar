@@ -80,30 +80,31 @@ router.post('/asignar', (req, res) => {
   });
 });
 
-// Obtener horario del alumno
-router.get('/horario/:alumnoId', (req, res) => {
-  const { alumnoId } = req.params;
+// Remove duplicate schedule endpoint to ensure GET /horario/:alumnoId works
+// router.get('/horario/:alumnoId', (req, res) => {
+//   const { alumnoId } = req.params;
+//   console.log(`📥 Request received for alumnoId: ${alumnoId}`); // Debug log
 
-  const sql = `
-    SELECT m.ID_materia, m.nombre_materia, h.Horario AS horario, h.dia_sem AS dia
-    FROM Inscripcion i
-    JOIN Materia m ON i.ID_materia = m.ID_materia
-    JOIN Horario h ON m.ID_materia = h.materia_FK
-    WHERE i.ID_alumno = ?
-  `;
+//   const sql = `
+//     SELECT m.ID_materia, m.nombre_materia, h.Horario AS horario, h.dia_sem AS dia
+//     FROM Inscripcion i
+//     JOIN Materia m ON i.ID_materia = m.ID_materia
+//     LEFT JOIN Horario h ON m.ID_materia = h.materia_FK
+//     WHERE i.ID_alumno = ?
+//   `;
 
-  db.query(sql, [alumnoId], (err, results) => {
-    if (err) {
-      console.error('Error al obtener el horario:', err);
-      return res.status(500).json({ error: 'Error al obtener el horario.' });
-    }
-    if (results.length === 0) {
-      console.warn(`No se encontró horario para el alumno con ID: ${alumnoId}`);
-      return res.status(404).json({ error: 'No se encontró horario para el alumno.' });
-    }
-    res.status(200).json(results);
-  });
-});
+//   db.query(sql, [alumnoId], (err, results) => {
+//     if (err) {
+//       console.error('Error al obtener el horario:', err);
+//       return res.status(500).json({ error: 'Error al obtener el horario.' });
+//     }
+//     if (results.length === 0) {
+//       console.warn(`No se encontró horario para el alumno con ID: ${alumnoId}`);
+//       return res.status(200).json([]); // Return an empty array instead of 404
+//     }
+//     res.status(200).json(results);
+//   });
+// });
 
 // Eliminar materia del horario
 router.delete('/eliminar/:materiaId', (req, res) => {
@@ -117,6 +118,31 @@ router.delete('/eliminar/:materiaId', (req, res) => {
       return res.status(500).json({ error: 'Error al eliminar la materia.' });
     }
     res.status(200).json({ message: 'Materia eliminada del horario.' });
+  });
+});
+
+// GET schedule for a student by alumnoId
+router.get('/:alumnoId', (req, res) => {
+  const alumnoId = parseInt(req.params.alumnoId);
+  console.log(`GET /horario/${alumnoId} route hit`); // Debug log to verify route matching
+  if (isNaN(alumnoId)) {
+    return res.status(400).json({ error: 'ID de alumno no válido.' });
+  }
+  
+  const sql = `
+    SELECT m.ID_materia, m.nombre_materia, h.Horario, h.dia_sem as dia
+    FROM Inscripcion i
+    JOIN Materia m ON i.ID_materia = m.ID_materia
+    JOIN Horario h ON h.materia_FK = m.ID_materia
+    WHERE i.ID_alumno = ? AND i.confirmada = 1
+  `;
+  
+  db.query(sql, [alumnoId], (err, results) => {
+    if (err) {
+      console.error("Error al obtener el horario:", err);
+      return res.status(500).json({ error: 'Error al obtener el horario.' });
+    }
+    res.json(results);
   });
 });
 

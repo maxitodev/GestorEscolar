@@ -15,7 +15,10 @@ const inscribirMateria = (materiaId, alumnoId, callback) => {
     }
     if (result.length > 0) {
       console.warn('El alumno ya está inscrito en la materia con ID:', materiaId);
-      return callback(new Error('Ya estás inscrito en esta materia.'));
+      return callback(null, {
+        mensaje: 'Ya estás inscrito en esta materia.',
+        id_inscripcion: null
+      });
     }
 
     // Verificar si hay cupo disponible en la materia

@@ -58,7 +58,11 @@ function DashboardAlumno() {
       alumnoId: alumnoId, // Send the correct integer ID
     })
       .then((response) => {
-        setMensaje(response.data.message); // Mostrar el mensaje de éxito
+        if (response.data.id_inscripcion === null) {
+          setMensaje(response.data.mensaje); // Handle duplicate inscription message
+        } else {
+          setMensaje(response.data.message); // Handle successful inscription
+        }
       })
       .catch((error) => {
         const errorMessage = error.response?.data?.error || 'Error al procesar la inscripción.';
@@ -80,21 +84,20 @@ function DashboardAlumno() {
       setMensaje('No se encontró el ID del alumno.');
       return;
     }
-  
+
+    console.log(`📤 Fetching schedule for alumnoId: ${alumnoId}`); // Debug log
+
     try {
       const res = await axios.get(`http://localhost:3001/horario/${alumnoId}`);
       if (res.data.length === 0) {
         setMensaje('No tienes materias inscritas en tu horario.');
+        setHorario([]); // Ensure the schedule is cleared
       } else {
         setHorario(res.data);
       }
     } catch (err) {
       const errorMessage = err.response?.data?.error || 'Error al cargar el horario.';
-      if (err.response?.status === 404) {
-        setMensaje('No se encontró horario para el alumno. Por favor, verifica tus inscripciones.');
-      } else {
-        setMensaje(errorMessage);
-      }
+      setMensaje(errorMessage);
       console.error('Error al obtener el horario:', err);
     }
   };
