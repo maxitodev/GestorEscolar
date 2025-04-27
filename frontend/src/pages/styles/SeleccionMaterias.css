@@ -1,0 +1,250 @@
+.seleccionar-materias {
+	/* ...existing global container styles... */
+	font-family: 'Arial', sans-serif;
+	background-color: #121212;
+	color: #ffffff;
+	overflow-x: hidden;
+	min-height: 0vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.seleccionar-materias .contenedor-seleccionar {
+	/* ...existing container styles... */
+	max-width: 800px;
+	width: 100%;
+	padding: 30px;
+	background: #1e1e1e;
+	border-radius: 15px;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+	animation: fadeIn 1s ease-in-out;
+}
+
+/* Encabezados */
+.seleccionar-materias h3,
+.seleccionar-materias h4 {
+	/* ...existing heading styles... */
+	color: #ff6f00;
+	text-align: center;
+	margin-bottom: 20px;
+	position: relative;
+}
+
+.seleccionar-materias h3 {
+	font-size: 2rem;
+	letter-spacing: 1.5px;
+}
+
+.seleccionar-materias h3::after {
+	content: '';
+	position: absolute;
+	bottom: -10px;
+	left: 50%;
+	width: 60px;
+	height: 3px;
+	background: #ff6f00;
+	transform: translateX(-50%);
+	transition: width 0.3s ease;
+}
+
+.seleccionar-materias h3:hover::after {
+	width: 80px;
+}
+
+/* Formulario */
+.seleccionar-materias .form-seleccionar {
+	/* ...existing form container styles... */
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.seleccionar-materias .form-seleccionar input,
+.seleccionar-materias .form-seleccionar select {
+	/* ...existing input/select styles... */
+	padding: 12px;
+	font-size: 1rem;
+	border: 1px solid #444;
+	border-radius: 8px;
+	background: #2b2b2b;
+	color: #fff;
+	transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.seleccionar-materias .form-seleccionar input:focus,
+.seleccionar-materias .form-seleccionar select:focus {
+	outline: none;
+	border-color: #ff6f00;
+	box-shadow: 0 0 10px rgba(255, 111, 0, 0.5);
+}
+
+.seleccionar-materias .form-seleccionar button {
+	/* ...existing button styles... */
+	padding: 12px;
+	font-size: 1rem;
+	color: #fff;
+	background: #ff6f00;
+	border: none;
+    margin-bottom: 5%;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.seleccionar-materias .form-seleccionar button:hover {
+	background: #e65c00;
+	transform: scale(1.05);
+}
+
+/* Mensajes */
+.seleccionar-materias .mensaje-exito {
+	/* ...existing mensaje-exito styles... */
+	background: #2e7d32;
+	color: #fff;
+	padding: 12px;
+	border-radius: 8px;
+	margin-top: 15px;
+	text-align: center;
+	animation: slideIn 0.5s ease-in-out;
+}
+
+.seleccionar-materias .mensaje-error {
+	/* ...existing mensaje-error styles... */
+	background: #b71c1c;
+	color: #fff;
+	padding: 12px;
+	border-radius: 8px;
+	margin-top: 15px;
+	text-align: center;
+	animation: shake 0.5s ease-in-out;
+}
+
+.mensaje-success {
+  background: #2ecc71;
+  color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.mensaje-success.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mensaje-error {
+  background: #e74c3c;
+  color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.mensaje-error.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slideIn {
+	from {
+		transform: translateY(-20px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes shake {
+	0%, 100% {
+		transform: translateX(0);
+	}
+	25% {
+		transform: translateX(-10px);
+	}
+	75% {
+		transform: translateX(10px);
+	}
+}
+
+/* Tabla */
+.seleccionar-materias .tabla-materias {
+	/* ...existing table styles... */
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.seleccionar-materias .tabla-materias th,
+.seleccionar-materias .tabla-materias td {
+	padding: 12px;
+	text-align: left;
+	border-bottom: 1px solid #333;
+	transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.seleccionar-materias .tabla-materias th {
+	background: #ff6f00;
+	color: #fff;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.seleccionar-materias .tabla-materias tr:nth-child(even) {
+	background: #2b2b2b;
+}
+
+.seleccionar-materias .tabla-materias tr:hover {
+	background: #3b3b3b;
+	transform: scale(1.01);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.seleccionar-materias .contenedor-seleccionar {
+		padding: 20px;
+	}
+	.seleccionar-materias .form-seleccionar {
+		gap: 15px;
+	}
+	.seleccionar-materias .tabla-materias th,
+	.seleccionar-materias .tabla-materias td {
+		font-size: 0.9rem;
+		padding: 10px;
+	}
+	.seleccionar-materias h3 {
+		font-size: 1.7rem;
+	}
+	.seleccionar-materias h4 {
+		font-size: 1.3rem;
+	}
+}

@@ -1,0 +1,104 @@
+.schedule-container {
+    max-width: 1220px;
+    margin: 2rem auto;
+    padding: 20px;
+  }
+  
+  .schedule-title {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+  }
+  
+  .schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 1px 3px rgb(255, 255, 255);
+  }
+  
+  .schedule-table th,
+  .schedule-table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ecf0f1;
+  }
+  
+  .schedule-table th {
+    background-color: #3498db;
+    color: white;
+    font-weight: 600;
+  }
+  
+  .time-slot {
+    background-color: #f8f9fa;
+    font-weight: 500;
+  }
+  
+  .schedule-cell {
+    transition: all 0.2s ease;
+  }
+  
+  .schedule-cell.filled {
+    background-color: #e3f2fd;
+    color: #2c3e50;
+  }
+  
+  .schedule-cell.empty {
+    background-color: #f8f9fa;
+    color: #95a5a6;
+  }
+  
+  .error-message {
+    color: #e74c3c;
+    text-align: center;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 4px;
+    background-color: #f8d7da;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .error-message.modern-error {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .error-message.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .no-schedule {
+    text-align: center;
+    color: #7f8c8d;
+    margin-top: 2rem;
+  }
+
+  .time-slot {
+    background-color: #f8f9fa;
+    font-weight: 500;
+    color: #000000; /* Negro puro */
+  }
+
+  .confirm-button {
+    margin-top: 20px;
+  }
+
+  .success-message {
+    color: #2ecc71;
+    text-align: center;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 4px;
+    background-color: #d4edda;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .success-message.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }

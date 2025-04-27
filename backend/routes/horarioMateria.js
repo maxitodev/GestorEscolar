@@ -133,8 +133,8 @@ router.get('/:alumnoId', (req, res) => {
     SELECT m.ID_materia, m.nombre_materia, h.Horario, h.dia_sem as dia
     FROM Inscripcion i
     JOIN Materia m ON i.ID_materia = m.ID_materia
-    JOIN Horario h ON h.materia_FK = m.ID_materia
-    WHERE i.ID_alumno = ? AND i.confirmada = 1
+    LEFT JOIN Horario h ON h.materia_FK = m.ID_materia
+    WHERE i.ID_alumno = ?
   `;
   
   db.query(sql, [alumnoId], (err, results) => {
