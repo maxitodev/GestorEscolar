@@ -41,7 +41,7 @@ El **Gestor Escolar** es una plataforma web integral diseñada para la administr
 
 ## 📚 Historias de Usuario
 
-### Sprint 2 - Funcionalidades Implementadas
+### Sprint 2 
 
 | ID | Historia de Usuario | Prioridad | Estado |
 |---|---|---|---|
@@ -51,7 +51,7 @@ El **Gestor Escolar** es una plataforma web integral diseñada para la administr
 | **HU-04** | Como administrador, quiero generar grupos de materias automáticamente | Media | ✅ |
 | **HU-05** | Como administrador, quiero asignar horarios a las materias | Baja | ✅ |
 
-### Sprint 3 - En Desarrollo
+### Sprint 3 
 
 | ID | Historia de Usuario | Prioridad | Estado |
 |---|---|---|---|
