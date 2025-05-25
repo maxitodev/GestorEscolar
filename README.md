@@ -250,9 +250,5 @@ GestorEscolar/
      origin: 'http://localhost:3000'
    }));
    ```
-
-## 👨‍💻 Equipo de Desarrollo
-
-- **Desarrollador Principal**: [@maxitodev](https://github.com/maxitodev)
-
+   
 ---
